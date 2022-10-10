@@ -8,36 +8,34 @@ TCP port : 1883
 SSL/TLS port : 8883 
 */
 
-const host = 'broker.emqx.io'
+const host = 'eu1.cloud.thethings.network'
 const port = '1883'
-const clientId = 'mqtt_${Math.random().tostring(16).slice(3)}'
-const connectUrl = 'mqtt://${host}:${port}'
+const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
+const connectUrl = `mqtt://${host}:${port}`
 
 const client = mqtt.connect(connectUrl, {
     clientId,
     clean: true,
     connectTimeout: 4000,
-    username: 'emqx',
-    password: 'public',
+    username: 'room-quality@ttn',
+    password: 'NNSXS.DP477SCLVUUKUKV2ECB3KVNOVIBATHX75LMHRIA.7WTPT6JQPVGNCR2GOYAN5WVSCUHVXE44UHFY64S3QIZHVL3YOQLQ',
     reconnectPeriod: 1000
 })
 
-const topic = '/nodejs/mqtt'
 client.on('connect', () => {
-  console.log('Connected')
-  client.subscribe([topic], () => {
-    console.log(`Subscribe to topic '${topic}'`)
-  })
-})
+  var topic = "v3/ecam-dht11@ttn/devices/eui-70b3d57ed0055dbb/up";console.log('Connected')
+  client.subscribe(topic); //single topic
+  console.log("connected +subscribed");
+});
 
-client.on('message', (topic, payload) => {
-    console.log('Received Message:', topic, payload.toString())
-})
+client.on("message", function (topic, message, packet) {
+  var getDataFromTTN = JSON.parse(message);
+  data = getDataFromTTN.uplink_message.decoded_payload;
+  console.log("message is " + message);
+  console.log("topic is " + topic);
+});
 
-client.on('connect', () => {
-    client.publish(topic, 'nodejs mqtt test', { qos: 0, retain: false }, (error) => {
-      if (error) {
-        console.error(error)
-      }
-    })
-})
+client.on("error", function (error) {
+  console.log("Can't connect" + error);
+  process.exit(1)
+});
