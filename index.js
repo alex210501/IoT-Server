@@ -1,13 +1,4 @@
 const mqtt = require('mqtt')
-
-/*
-In this part of the code I'll use a free public MQTT Server provided by 
-EMQX, which is created based on EMQ's MQTT cloud
-Broker (host) : broker.emqx.io
-TCP port : 1883
-SSL/TLS port : 8883 
-*/
-
 const host = 'eu1.cloud.thethings.network'
 const port = '1883'
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
