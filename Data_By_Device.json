@@ -1,0 +1,13 @@
+[
+  {
+    "device_id": "device-1",
+    "data": {
+      "gps": {
+        "latitude": "NaN",
+        "longitude": "NaN"
+      },
+      "humidity": null,
+      "temperature": "NaN"
+    }
+  }
+]
