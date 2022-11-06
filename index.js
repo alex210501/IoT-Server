@@ -4,6 +4,9 @@ const port = '1883'
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 const connectUrl = `mqtt://${host}:${port}`
 var fs = require('fs');
+const express = require('express');
+const app = express();
+const port_2 = '8080'
 let Data = [];
 
 const client = mqtt.connect(connectUrl, {
@@ -29,16 +32,20 @@ client.on("message", function (topic, message, packet) {
   data = getDataFromTTN.uplink_message.decoded_payload;
   let data_device = {"device_id": device_id, "data" : data}
   Data.push(data_device);
-  var Data_file = JSON.stringify(Data, null, 2);
-  fs.writeFile("Data_By_Device.json", Data_file, function(err, result) {
-    if(err) console.log('error', err);
-  });
 });
-
-
 
 client.on("error", function (error) {
   console.log("Can't connect" + error);
   process.exit(1)
 });
 
+// Sending the Json on the API
+app.listen( port_2, function(){
+  console.log("Server is running on port 8080");
+});
+
+app.set('json spaces', 2);
+
+app.get('/', (req, res) => {
+  res.json(Data)
+});
