@@ -5,9 +5,6 @@
 ### Connection to 'thethingsnetwork'
 
 - To try the server you'll need to connect to the following page : [Site](https://www.thethingsnetwork.org/)
-- Use the following credentials :  
-Username - ecamiot2022  
-Password - ecam2022
 - Then go to 'Appilcations' and select 'room-quality'
 - Click on 'End devices' and then click on 'device-1'
 - Click on 'Messaging', here you are. You'll now be able to simulate an uplink to the server.
