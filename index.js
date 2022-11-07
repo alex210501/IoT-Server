@@ -5,7 +5,10 @@ const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
 const connectUrl = `mqtt://${host}:${port}`
 var fs = require('fs');
 const express = require('express');
+const { json } = require('express')
 const app = express();
+var cors = require('cors');
+app.use(cors());
 const port_2 = '8080'
 let Data = [];
 
@@ -31,6 +34,7 @@ client.on("message", function (topic, message, packet) {
   device_id = getDataFromTTN.end_device_ids.device_id;
   data = getDataFromTTN.uplink_message.decoded_payload;
   let data_device = {"device_id": device_id, "data" : data}
+  Data = [];
   Data.push(data_device);
 });
 
@@ -47,5 +51,5 @@ app.listen( port_2, function(){
 app.set('json spaces', 2);
 
 app.get('/', (req, res) => {
-  res.json(Data)
+  res.json(Data);
 });
