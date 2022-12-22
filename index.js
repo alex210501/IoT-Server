@@ -45,7 +45,8 @@ client.on("error", function (error) {
 
 // Sending the Json on the API
 app.listen( port_2, function(){
-  console.log("Server is running on port 8080");
+  var message = `Server is running on port : ${port_2}`;
+  console.log(message);
 });
 
 app.set('json spaces', 2);
