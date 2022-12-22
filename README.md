@@ -6,7 +6,7 @@
 
 - To try the server you'll need to connect to the following page : [Site](https://www.thethingsnetwork.org/)
 - Then go to 'Appilcations' and select 'room-quality'
-- Click on 'End devices' and then click on 'device-1'
+- Click on 'End devices' and then click on 'device-2'
 - Click on 'Messaging', here you are. You'll now be able to simulate an uplink to the server.
 - But you'll need to start the server first ( before clicking on 'simulate uplink' ).
 
